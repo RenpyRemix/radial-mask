@@ -1,15 +1,25 @@
-﻿#
-#
-#
-#
-# Remove this bit if you just want the mask class
+## To view example in your game add
+##
+##  call radial_mask_example
+##
+## somewhere in your running label script
 
 
-init python:
 
-    # Just for this sample... so it runs
+            ###########################################
+            #                                         #
+            #           To use in your game           #
+            #                                         #
+            #   Just use it as you would any other    #
+            #   displayable object. Note you can      #
+            #   alter the attributes after creation   #
+            #   and it will recalculate what to show  #
+            #                                         #
+            ###########################################
 
-    config.label_overrides['start'] = "radial_mask_example"
+
+### Horrible example usage. Using screen timer to adjust it is 
+### not really the optimum approach.
 
 
 image clockface = "images/kisscc0-clockface.png"
@@ -38,10 +48,6 @@ label radial_mask_example:
     "..."
 
     hide screen clockcountdown
-
-    if "start" in config.label_overrides:
-
-        $ del config.label_overrides['start']
 
     return
 
