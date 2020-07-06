@@ -6,11 +6,38 @@ The file starts of with a very basic example using a clockface which you can vie
 Please note though that it is not a great example as it uses a timer to tick through the degrees. You'd do better by having a dynamic displayable alter the degree values and return an instance.  
 As this is aimed at more experienced programmers, I will leave that to you.
 
+```py
+    class RadialMask(renpy.Displayable):
+        """                                                                   
+        Return an alpha mask for the specified angles radiating 
+        from the center. Passed angles are measured in degrees  
+        clockwise from the top.
 
+        @kwargs:
+            size:    (200,200) - tuple of integer (width, height)
+            start:   0.0       - float degree start of shown area
+            end:     360.0     - float degree end of shown area
 
+            center:  (*size/2) - tuple of rotation center
+        """
+```
+Pretty much all the information you need to use it.
+
+The keywords, as detailed, create a few attributes to govern the output render:
+
+self.w, self.h :: width and height taken from the size setting  
+self.cx, self.cy :: center x and y position taken from the center setting (defaulting to half w, half h)
+
+Those attributes are used to calculate a self.calc_map which basically computes the angle to each corner as well as static values used in the polygon math. Changing any of those values (pretty rare) will result in the calc_map being recomputed.
+
+self.start, self.end :: angle in degrees clockwise from top that the mask starts and ends at
+
+Changing either of these results in a render.invalidate which means the render method is recalled to redraw the displayable. That render method uses the start and end values along with the calc_map to quickly compute the points of a polygon. That polygon is drawn and filled by pygame at a slightly larger size and the downscaled using subpixel_blit to create an anti-aliased version more suitable for masking.
+
+Have fun trying it in your projects and let me know if you find a bug or snaffu.
 
 #### Note:  
-If the center is positioned on one of the edges, at or near a corner, andgles close to the 90 degree areas might not look the best. They can leave slight gaps between the center and the start of the mask polygon. 
+If the center is positioned on one of the edges, at or near a corner, angles close to the 90 degree areas might not look the best. They can leave slight gaps between the center and the start of the mask polygon. 
 
 [![Support me on Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=19978585)
 
