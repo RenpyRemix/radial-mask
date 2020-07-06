@@ -32,12 +32,13 @@ Those attributes are used to calculate a self.calc_map which basically computes 
 
 self.start, self.end :: angle in degrees clockwise from top that the mask starts and ends at
 
-Changing either of these results in a render.invalidate which means the render method is recalled to redraw the displayable. That render method uses the start and end values along with the calc_map to quickly compute the points of a polygon. That polygon is drawn and filled by pygame at a slightly larger size and the downscaled using subpixel_blit to create an anti-aliased version more suitable for masking.
+Changing either of these results in a render.invalidate which means the render method is recalled to redraw the displayable. That render method uses the start and end values along with the calc_map to quickly compute the points of a polygon. That polygon is drawn and filled by pygame at a slightly larger size and then downscaled using subpixel_blit to create an anti-aliased version more suitable for masking.
 
 Have fun trying it in your projects and let me know if you find a bug or snaffu.
 
 #### Note:  
 If the center is positioned on one of the edges, at or near a corner, angles close to the 90 degree areas might not look the best. They can leave slight gaps between the center and the start of the mask polygon. 
+
 
 [![Support me on Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/bePatron?u=19978585)
 
