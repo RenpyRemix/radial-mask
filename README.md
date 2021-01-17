@@ -1,3 +1,11 @@
+# Note:
+With the new GLSL features of Ren'Py 7.4 and above, this will be easier done through a Shader.  
+Should be pretty straight forward math (just test if the target pixel is between the desired angles to the centre). Just the anti-aliasing will need some fine tuning.  
+On the #Todo list
+
+
+
+
 # Radial Mask
 A Displayable for AlphaMask'ing.  
 Pretty straight forward, just set a size, optional center and the start and end degrees
